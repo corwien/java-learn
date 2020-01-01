@@ -42,7 +42,7 @@ public class CenterPanel extends JPanel {
 	  
 	    public void show(JComponent p) {
 	        this.c = p;
-	        Component[] cs = getComponents();
+	        Component[] cs = this.getComponents();
 	        for (Component c : cs) {
 	            remove(c);
 	        }
