@@ -1,5 +1,8 @@
 package gui.panel;
 
+import static util.GUIUtil.setColor;
+import static util.GUIUtil.showPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
@@ -7,12 +10,14 @@ import java.awt.GridLayout;
  
 import javax.swing.JLabel;
 import javax.swing.JPanel;
- 
+
+import gui.page.SpendPage;
+import service.SpendService;
 import util.CircleProgressBar;
 import util.ColorUtil;
 import util.GUIUtil;
 
-public class SpendPanel extends JPanel {
+public class SpendPanel extends WorkingPanel {
 	
 	 static{
 	        GUIUtil.useLNF();
@@ -42,9 +47,9 @@ public class SpendPanel extends JPanel {
         bar = new CircleProgressBar();
         bar.setBackgroundColor(ColorUtil.blueColor);
  
-        GUIUtil.setColor(ColorUtil.grayColor, lMonthSpend, lTodaySpend, lAvgSpendPerDay, lMonthLeft, lDayAvgAvailable,
+        setColor(ColorUtil.grayColor, lMonthSpend, lTodaySpend, lAvgSpendPerDay, lMonthLeft, lDayAvgAvailable,
                 lMonthLeftDay, vAvgSpendPerDay, vMonthAvailable, vDayAvgAvailable, vMonthLeftDay);
-        GUIUtil.setColor(ColorUtil.blueColor, vMonthSpend, vTodaySpend);
+        setColor(ColorUtil.blueColor, vMonthSpend, vTodaySpend);
  
         vMonthSpend.setFont(new Font("微软雅黑", Font.BOLD, 23));
         vTodaySpend.setFont(new Font("微软雅黑", Font.BOLD, 23));
@@ -97,5 +102,39 @@ public class SpendPanel extends JPanel {
          
         GUIUtil.showPanel(SpendPanel.instance);
     }
+    
+    @Override
+    public void updateData() {
+        SpendPage spend = new SpendService().getSpendPage();
+        vMonthSpend.setText(spend.monthSpend);
+        vTodaySpend.setText(spend.todaySpend);
+        vAvgSpendPerDay.setText(spend.avgSpendPerDay);
+        vMonthAvailable.setText(spend.monthAvailable);
+        vDayAvgAvailable.setText(spend.dayAvgAvailable);
+        vMonthLeftDay.setText(spend.monthLeftDay);
+ 
+        bar.setProgress(spend.usagePercentage);
+        if (spend.isOverSpend) {
+            vMonthAvailable.setForeground(ColorUtil.warningColor);
+            vMonthSpend.setForeground(ColorUtil.warningColor);
+            vTodaySpend.setForeground(ColorUtil.warningColor);
+ 
+        } else {
+            vMonthAvailable.setForeground(ColorUtil.grayColor);
+            vMonthSpend.setForeground(ColorUtil.blueColor);
+            vTodaySpend.setForeground(ColorUtil.blueColor);
+        }
+        bar.setForegroundColor(ColorUtil.getByPercentage(spend.usagePercentage));
+        addListener();
+ 
+    }
+ 
+    @Override
+    public void addListener() {
+        // TODO Auto-generated method stub
+ 
+    }
+    
+    
 
 }
