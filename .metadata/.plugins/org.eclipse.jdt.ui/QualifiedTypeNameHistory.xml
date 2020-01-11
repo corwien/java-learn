@@ -5,4 +5,7 @@
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="dao.ConfigDAO"/>
     <fullyQualifiedTypeName name="entity.Config"/>
+    <fullyQualifiedTypeName name="dao.RecordDAO"/>
+    <fullyQualifiedTypeName name="entity.Category"/>
+    <fullyQualifiedTypeName name="entity.Record"/>
 </qualifiedTypeNameHistroy>
