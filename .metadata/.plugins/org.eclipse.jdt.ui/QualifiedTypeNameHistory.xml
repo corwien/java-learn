@@ -8,4 +8,6 @@
     <fullyQualifiedTypeName name="dao.RecordDAO"/>
     <fullyQualifiedTypeName name="entity.Category"/>
     <fullyQualifiedTypeName name="entity.Record"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
 </qualifiedTypeNameHistroy>
