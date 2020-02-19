@@ -43,6 +43,9 @@ public class CategoryServlet extends BaseBackServlet {
 		
 		File  imageFolder= new File(request.getSession().getServletContext().getRealPath("img/category"));
 	    File file = new File(imageFolder,c.getId()+".jpg");
+	    
+	    // 绝对路径获取
+	    // File path = file.getAbsoluteFile();
          
         try {
             if(null!=is && 0!=is.available()){
